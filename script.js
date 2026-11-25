@@ -20,12 +20,55 @@
             }
         });
 
+        // Submit the contact form without navigating away from the page.
+        const contactForm = document.getElementById("contact-form");
+        if (contactForm) {
+            const formStatus = document.getElementById("form-status");
+            const submissionDialog = document.getElementById("submission-dialog");
+            const submitButton = contactForm.querySelector(".form-submit");
+            const submitLabel = submitButton.innerHTML;
+
+            contactForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                formStatus.hidden = true;
+                submitButton.disabled = true;
+                submitButton.textContent = "Sending…";
+
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: "POST",
+                        body: new FormData(contactForm),
+                        headers: { Accept: "application/json" }
+                    });
+
+                    if (!response.ok) throw new Error("The inquiry could not be sent. Please try again or contact me directly.");
+
+                    contactForm.reset();
+                    submissionDialog.showModal();
+                } catch (error) {
+                    formStatus.textContent = error.message || "Something went wrong. Please try again or contact me directly.";
+                    formStatus.hidden = false;
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = submitLabel;
+                }
+            });
+
+            submissionDialog.querySelector(".dialog-close").addEventListener("click", () => {
+                submissionDialog.close();
+            });
+            submissionDialog.addEventListener("click", (event) => {
+                if (event.target === submissionDialog) submissionDialog.close();
+            });
+        }
+
         // service slider
         const serviceSlider = document.querySelector(".service-scroll");
         let isDraggingServices = false;
         let dragStartX = 0;
         let sliderStartScroll = 0;
 
+        if (serviceSlider) {
         serviceSlider.addEventListener("pointerdown", (event) => {
             if (event.pointerType !== "mouse" || event.button !== 0) return;
             isDraggingServices = true;
@@ -50,3 +93,4 @@
         serviceSlider.querySelectorAll("img").forEach((image) => {
             image.draggable = false;
         });
+        }

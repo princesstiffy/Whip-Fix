@@ -70,7 +70,7 @@
             <div class="contact-form">
                 <h3>SEND AN INQUIRY</h3>
                 <p class="form-intro">Share a few details about you and your vehicle. This is an inquiry only; appointments are confirmed separately.</p>
-                <form action="https://formspree.io/f/mdegyygn" method="POST">
+                <form id="contact-form" action="https://formspree.io/f/mdegyygn" method="POST">
                     <div class="form-field">
                         <label for="name">Name <span aria-hidden="true">*</span></label>
                         <input id="name" name="name" type="text" autocomplete="name" required>
@@ -120,10 +120,20 @@
 
                     <button class="form-submit" type="submit">Send inquiry <span aria-hidden="true">→</span></button>
                     <p class="form-note"><span aria-hidden="true">*</span> Required fields</p>
+                    <p class="form-status" id="form-status" role="alert" aria-live="polite" hidden></p>
                 </form>
             </div>
         </section>
     </main>
+
+    <dialog class="submission-dialog" id="submission-dialog" aria-labelledby="submission-title" aria-describedby="submission-message">
+        <div class="submission-dialog-content">
+            <p class="submission-eyebrow">WHIP FIX</p>
+            <h2 id="submission-title">INQUIRY SENT</h2>
+            <p id="submission-message">Thanks for reaching out. I’ll be in touch soon.</p>
+            <button class="form-submit dialog-close" type="button">Back to the page <span aria-hidden="true">×</span></button>
+        </div>
+    </dialog>
 
     <!-- footer -->
     <footer class="site-footer">

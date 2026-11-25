@@ -400,6 +400,43 @@ body {
     margin: -10px 0 0; 
     font-size: 13px; 
 }
+.form-status {
+    margin: 0;
+    padding: 12px 14px;
+    border-left: 3px solid var(--blue);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.5;
+}
+.form-status[hidden] { display: none; }
+.submission-dialog {
+    width: min(440px, calc(100% - 40px));
+    padding: 0;
+    border: 2px solid var(--blue);
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 10px 10px 0 var(--blue);
+}
+.submission-dialog::backdrop { background: rgb(29 29 29 / 72%); }
+.submission-dialog-content { padding: clamp(28px, 7vw, 48px); }
+.submission-eyebrow {
+    margin: 0 0 12px;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .14em;
+}
+.submission-dialog h2 {
+    margin: 0 0 12px;
+    font: 42px/1 'Muscle', sans-serif;
+}
+.submission-dialog-content > p:not(.submission-eyebrow) {
+    margin: 0 0 28px;
+    line-height: 1.55;
+}
+.dialog-close { width: 100%; }
+.dialog-close span { font-size: 24px; }
+.submission-dialog :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 
 .contact .socials { 
     margin-top: 32px; 
